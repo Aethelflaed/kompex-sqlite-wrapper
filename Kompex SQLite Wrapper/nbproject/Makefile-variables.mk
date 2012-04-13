@@ -6,6 +6,7 @@
 CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
+INCLUDE_DIR=../include
 # DebugStaticLib configuration
 CND_PLATFORM_DebugStaticLib=GNU-Linux-x86
 CND_ARTIFACT_DIR_DebugStaticLib=../lib/debug
