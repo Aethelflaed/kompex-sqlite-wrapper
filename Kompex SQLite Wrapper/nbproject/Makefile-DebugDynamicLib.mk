@@ -27,14 +27,14 @@ CND_DISTDIR=dist
 include Makefile
 
 # Object Directory
-OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
+OBJECTDIR=${BUILD_DIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteBlob.o \
-	${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteStatement.o \
-	${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteDatabase.o \
-	${OBJECTDIR}/_ext/_DOTDOT/src/sqlite3.o
+	${OBJECTDIR}/KompexSQLiteBlob.o \
+	${OBJECTDIR}/KompexSQLiteStatement.o \
+	${OBJECTDIR}/KompexSQLiteDatabase.o \
+	${OBJECTDIR}/sqlite3.o
 
 # C Compiler Flags
 CFLAGS=
@@ -54,31 +54,31 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-DebugDynamicLib.mk ../lib/debug/KompexSQLiteWrapper_d.so
+	${MAKE}  -f nbproject/Makefile-DebugDynamicLib.mk ${LIB_DIR}/debug/KompexSQLiteWrapper_d.so
 
-../lib/debug/KompexSQLiteWrapper_d.so: ${OBJECTFILES}
-	${MKDIR} -p ../lib/debug
-	${LINK.cc} -shared -o ../lib/debug/KompexSQLiteWrapper_d.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+${LIB_DIR}/debug/KompexSQLiteWrapper_d.so: ${OBJECTFILES}
+	${MKDIR} -p ${LIB_DIR}/debug
+	${LINK.cc} -shared -o ${LIB_DIR}/debug/KompexSQLiteWrapper_d.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteBlob.o: nbproject/Makefile-${CND_CONF}.mk ../src/KompexSQLiteBlob.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src
+${OBJECTDIR}/KompexSQLiteBlob.o: nbproject/Makefile-${CND_CONF}.mk ${SRC_DIR}/KompexSQLiteBlob.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteBlob.o ../src/KompexSQLiteBlob.cpp
+	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/KompexSQLiteBlob.o ${SRC_DIR}/KompexSQLiteBlob.cpp
 
-${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteStatement.o: nbproject/Makefile-${CND_CONF}.mk ../src/KompexSQLiteStatement.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src
+${OBJECTDIR}/KompexSQLiteStatement.o: nbproject/Makefile-${CND_CONF}.mk ${SRC_DIR}/KompexSQLiteStatement.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteStatement.o ../src/KompexSQLiteStatement.cpp
+	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/KompexSQLiteStatement.o ${SRC_DIR}/KompexSQLiteStatement.cpp
 
-${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteDatabase.o: nbproject/Makefile-${CND_CONF}.mk ../src/KompexSQLiteDatabase.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src
+${OBJECTDIR}/KompexSQLiteDatabase.o: nbproject/Makefile-${CND_CONF}.mk ${SRC_DIR}/KompexSQLiteDatabase.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/KompexSQLiteDatabase.o ../src/KompexSQLiteDatabase.cpp
+	$(COMPILE.cc) -g -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -I${INCLUDE_DIR} -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/KompexSQLiteDatabase.o ${SRC_DIR}/KompexSQLiteDatabase.cpp
 
-${OBJECTDIR}/_ext/_DOTDOT/src/sqlite3.o: nbproject/Makefile-${CND_CONF}.mk ../src/sqlite3.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/_DOTDOT/src
+${OBJECTDIR}/sqlite3.o: nbproject/Makefile-${CND_CONF}.mk ${SRC_DIR}/sqlite3.c 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/_DOTDOT/src/sqlite3.o ../src/sqlite3.c
+	$(COMPILE.c) -g -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/sqlite3.o ${SRC_DIR}/sqlite3.c
 
 # Subprojects
 .build-subprojects:
@@ -86,7 +86,7 @@ ${OBJECTDIR}/_ext/_DOTDOT/src/sqlite3.o: nbproject/Makefile-${CND_CONF}.mk ../sr
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r build/DebugDynamicLib
-	${RM} ../lib/debug/KompexSQLiteWrapper_d.so
+	${RM} ${LIB_DIR}/debug/KompexSQLiteWrapper_d.so
 
 # Subprojects
 .clean-subprojects:
