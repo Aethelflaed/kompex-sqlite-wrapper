@@ -12,11 +12,7 @@ LIB_DIR=lib
 BUILD_DIR=build
 
 PLATFORM=GNU-Linux
-PROJECTNAME=Kompex SQLite Wrapper
 PRODUCT_NAME=kompex-sqlite-wrapper
-
-DEFAULTCONF=shared
-CONF=${DEFAULTCONF}
 
 all: static shared
 
