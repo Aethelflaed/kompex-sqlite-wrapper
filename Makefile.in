@@ -39,3 +39,9 @@ static:
 shared:
 	$(MAKE) -f Makefile-shared.mk CONF=shared .build-conf
 
+install:
+	$(MKDIR) -p $(libdir)
+	$(MKDIR) -p $(headerdir)
+	cp $(prelibdir)/* $(libdir)
+	cp $(includedir)/* $(headerdir)
+
