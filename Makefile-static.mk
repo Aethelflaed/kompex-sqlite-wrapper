@@ -1,18 +1,8 @@
-#
-# Generated Makefile - do not edit!
-#
-# Edit the Makefile in the project folder instead (../Makefile). Each target
-# has a -pre and a -post target defined where you can add customized code.
-#
-# This makefile implements configuration specific macros and targets.
-
-
-
 # Include project Makefile
 include Makefile
 
 # Object Directory
-OBJECTDIR=${BUILD_DIR}/${CONF}/${PLATFORM}
+OBJECTDIR=${BUILD_DIR}/${CONF}
 
 # Object Files
 OBJECTFILES= \
@@ -25,27 +15,20 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
 CXXFLAGS=
-
-# Fortran Compiler Flags
-FFLAGS=
-
-# Assembler Flags
-ASFLAGS=
 
 # Link Libraries and Options
 LDLIBSOPTIONS=
 
 # Build Targets
-.build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f Makefile-ReleaseStaticLib.mk ${LIB_DIR}/release/KompexSQLiteWrapper_Static.a
+.build-conf:
+	${MAKE}  -f Makefile-${CONF}.mk ${LIB_DIR}/${PRODUCT_NAME}.a
 
-${LIB_DIR}/release/KompexSQLiteWrapper_Static.a: ${OBJECTFILES}
-	${MKDIR} -p ${LIB_DIR}/release
-	${RM} ${LIB_DIR}/release/KompexSQLiteWrapper_Static.a
-	${AR} rv ${LIB_DIR}/release/KompexSQLiteWrapper_Static.a ${OBJECTFILES} 
-	$(RANLIB) ${LIB_DIR}/release/KompexSQLiteWrapper_Static.a
+${LIB_DIR}/${PRODUCT_NAME}.a: ${OBJECTFILES}
+	${MKDIR} -p ${LIB_DIR}
+	${RM} ${LIB_DIR}/${PRODUCT_NAME}.a
+	${AR} rv ${LIB_DIR}/${PRODUCT_NAME}.a ${OBJECTFILES} 
+	$(RANLIB) ${LIB_DIR}/${PRODUCT_NAME}.a
 
 ${OBJECTDIR}/KompexSQLiteBlob.o: Makefile-${CONF}.mk ${SRC_DIR}/KompexSQLiteBlob.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -71,9 +54,9 @@ ${OBJECTDIR}/sqlite3.o: Makefile-${CONF}.mk ${SRC_DIR}/sqlite3.c
 .build-subprojects:
 
 # Clean Targets
-.clean-conf: ${CLEAN_SUBPROJECTS}
-	${RM} -r build/ReleaseStaticLib
-	${RM} ${LIB_DIR}/release/KompexSQLiteWrapper_Static.a
+.clean-conf:
+	${RM} -r build/${CONF}
+	${RM} ${LIB_DIR}/${PRODUCT_NAME}.a
 
 # Subprojects
 .clean-subprojects:

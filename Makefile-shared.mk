@@ -1,18 +1,8 @@
-#
-# Generated Makefile - do not edit!
-#
-# Edit the Makefile in the project folder instead (../Makefile). Each target
-# has a -pre and a -post target defined where you can add customized code.
-#
-# This makefile implements configuration specific macros and targets.
-
-
-# Environment
 # Include project Makefile
 include Makefile
 
 # Object Directory
-OBJECTDIR=${BUILD_DIR}/${CONF}/${PLATFORM}
+OBJECTDIR=${BUILD_DIR}/${CONF}
 
 # Object Files
 OBJECTFILES= \
@@ -25,25 +15,18 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
 CXXFLAGS=
-
-# Fortran Compiler Flags
-FFLAGS=
-
-# Assembler Flags
-ASFLAGS=
 
 # Link Libraries and Options
 LDLIBSOPTIONS=
 
 # Build Targets
-.build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f Makefile-ReleaseDynamicLib.mk ${LIB_DIR}/release/KompexSQLiteWrapper.so
+.build-conf:
+	${MAKE}  -f Makefile-${CONF}.mk ${LIB_DIR}/${PRODUCT_NAME}.so
 
-${LIB_DIR}/release/KompexSQLiteWrapper.so: ${OBJECTFILES}
-	${MKDIR} -p ${LIB_DIR}/release
-	${LINK.cc} -shared -o ${LIB_DIR}/release/KompexSQLiteWrapper.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+${LIB_DIR}/${PRODUCT_NAME}.so: ${OBJECTFILES}
+	${MKDIR} -p ${LIB_DIR}
+	${LINK.cc} -shared -o ${LIB_DIR}/${PRODUCT_NAME}.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/KompexSQLiteBlob.o: Makefile-${CONF}.mk ${SRC_DIR}/KompexSQLiteBlob.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -69,9 +52,9 @@ ${OBJECTDIR}/sqlite3.o: Makefile-${CONF}.mk ${SRC_DIR}/sqlite3.c
 .build-subprojects:
 
 # Clean Targets
-.clean-conf: ${CLEAN_SUBPROJECTS}
-	${RM} -r build/ReleaseDynamicLib
-	${RM} ${LIB_DIR}/release/KompexSQLiteWrapper.so
+.clean-conf:
+	${RM} -r build/${CONF}
+	${RM} ${LIB_DIR}/${PRODUCT_NAME}.so
 
 # Subprojects
 .clean-subprojects:
