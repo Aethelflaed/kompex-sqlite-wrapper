@@ -3,7 +3,7 @@ VPATH = @srcdir@
 
 prefix_ = @prefix@
 ifneq ($(DESTDIR),)
-	prefix_ = $(DESTDIR)
+	prefix_ = $(DESTDIR)@prefix@
 endif
 
 subdirs = @subdirs@
