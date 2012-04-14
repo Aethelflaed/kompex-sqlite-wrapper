@@ -48,18 +48,8 @@ ${OBJECTDIR}/sqlite3.o: Makefile-${CONF}.mk ${SRC_DIR}/sqlite3.c
 	${RM} $@.d
 	$(COMPILE.c) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/sqlite3.o ${SRC_DIR}/sqlite3.c
 
-# Subprojects
-.build-subprojects:
-
 # Clean Targets
 .clean-conf:
 	${RM} -r build/${CONF}
 	${RM} ${LIB_DIR}/${PRODUCT_NAME}.so
 
-# Subprojects
-.clean-subprojects:
-
-# Enable dependency checking
-.dep.inc: .depcheck-impl
-
-include .dep.inc
