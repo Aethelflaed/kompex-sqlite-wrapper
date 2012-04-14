@@ -30,7 +30,7 @@ all: static shared
 clean:
 	$(RM) -r ${builddir}
 	$(RM) -r ${prelibdir}
-	$(RM) man/*.{[1-9], gz}
+	$(RM) man/*.{[1-9],gz}
 	$(RM) config.{h,log,status}
 	$(RM) Makefile
 
@@ -43,6 +43,7 @@ shared:
 install: doc
 	$(MKDIR) -p $(libdir)
 	$(MKDIR) -p $(headerdir)
+	$(MKDIR) -p $(mandir)
 	cp $(prelibdir)/* $(libdir)
 	cp $(includedir)/* $(headerdir)
 	cp man/kompex.3.gz $(mandir)
