@@ -1,13 +1,18 @@
 SHELL = /bin/sh
 VPATH = @srcdir@
 
+prefix_ = @prefix@
+ifneq ($(DESTDIR),)
+	prefix_ = $(DESTDIR)
+endif
+
 subdirs = @subdirs@
 top_srcdir = @top_srcdir@
 srcdir = @srcdir@/src
 includedir = @srcdir@/include
 builddir = @srcdir@/build
 prelibdir = @srcdir@/lib
-prefix = @prefix@
+prefix = $(prefix_)
 exec_prefix = @exec_prefix@
 infodir = $(prefix)/info
 libdir = $(prefix)/lib
