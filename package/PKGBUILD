@@ -1,5 +1,5 @@
 # Maintainer: Geoffroy Planquart <geoffroy@aethelflaed.com>
-pkgname=kompex-sqlite-wrapper-git
+pkgname=kompex-sqlite-wrapper
 pkgver=1.8.10
 pkgrel=1
 pkgdesc="An open source C++ wrapper library for SQLite"
@@ -19,26 +19,27 @@ source=()
 noextract=()
 md5sums=()
 
-_gitroot='git@localhost:personals/Geoffroy/kompex-sqlite-wrapper'
-_gitname='kompex-sqlite-wrapper'
-
 build() {
+  # Although the sources are taken from git, it's not the original repository
+  # so I don't use _gitroot and _gitname to prevent pkgver from changin
+  giturl='git@localhost:personals/Geoffroy/kompex-sqlite-wrapper'
+
   cd "$srcdir"
   msg "Connecting to GIT server...."
 
-  if [[ -d "$_gitname" ]]; then
-    cd "$_gitname" && git pull origin
+  if [[ -d "$pkgname" ]]; then
+    cd "$pkgname" && git pull origin
     msg "The local files are updated."
   else
-    git clone "$_gitroot" "$_gitname"
+    git clone "$giturl" "$pkgname"
   fi
 
   msg "GIT checkout done or server timeout"
   msg "Starting build..."
 
-  rm -rf "$srcdir/$_gitname-build"
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-  cd "$srcdir/$_gitname-build"
+  rm -rf "$srcdir/$pkgname-build"
+  git clone "$srcdir/$pkgname" "$srcdir/$pkgname-build"
+  cd "$srcdir/$pkgname-build"
 
   #
   # BUILD HERE
