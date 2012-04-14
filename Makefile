@@ -9,12 +9,12 @@ CXX=g++
 FC=
 AS=as
 
-SRC_DIR=../src
-INCLUDE_DIR=../include
-LIB_DIR=../lib
+SRC_DIR=src
+INCLUDE_DIR=include
+LIB_DIR=lib
 BUILD_DIR=build
 
-PALTFORM=GNU-Linux
+PLATFORM=GNU-Linux
 PROJECTNAME=Kompex SQLite Wrapper
 
 DEFAULTCONF=DebugStaticLib
@@ -81,7 +81,7 @@ all: .all-post
 	@#echo "=> Running $@..."
 	for CONF in ${ALLCONFS}; \
 	do \
-	    ${MAKE} -f Makefile-$${CONF}.mk SUBPROJECTS=${SUBPROJECTS} .build-conf; \
+	    ${MAKE} -f Makefile-$${CONF}.mk CONF=$${CONF} SUBPROJECTS=${SUBPROJECTS} .build-conf; \
 	done
 
 .depcheck-impl:
