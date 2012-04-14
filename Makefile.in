@@ -1,0 +1,47 @@
+SHELL = /bin/sh
+VPATH = @srcdir@
+
+subdirs = @subdirs@
+top_srcdir = @top_srcdir@
+srcdir = @srcdir@/src
+includedir = @srcdir@/include
+builddir = @srcdir@/build
+prelibdir = @srcdir@/lib
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+infodir = $(prefix)/info
+libdir = $(prefix)/lib
+mandir = $(prefix)/man/man3
+headerdir = $(prefix)/include/kompex
+
+CC = @CC@
+CFLAGS = @CFLAGS@
+CPPFLAGS = $(CFLAGS) @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+INSTALL = @INSTALL@
+MKDIR = mkdir
+RANLIB = ranlib
+
+PRODUCT_NAME=kompex-sqlite-wrapper
+
+all: static shared
+
+clean:
+	$(RM) -r ${builddir}
+	$(RM) -r ${prelibdir}
+	$(RM) config.{h,log,status}
+	$(RM) Makefile
+
+static:
+	$(MAKE) -f Makefile-static.mk CONF=static .build-conf
+
+shared:
+	$(MAKE) -f Makefile-shared.mk CONF=shared .build-conf
+
+install:
+	$(MKDIR) -p $(libdir)
+	$(MKDIR) -p $(headerdir)
+	cp $(prelibdir)/* $(libdir)
+	cp $(includedir)/* $(headerdir)
+
