@@ -10,9 +10,9 @@ prelibdir = @srcdir@/lib
 prefix = @prefix@
 exec_prefix = @exec_prefix@
 infodir = $(prefix)/info
-libdir = $(prefix)/lib/kompex
-mandir = $(prefix)/man/man1
-headerdir = $(prefix)/include
+libdir = $(prefix)/lib
+mandir = $(prefix)/man/man3
+headerdir = $(prefix)/include/kompex
 
 CC = @CC@
 CFLAGS = @CFLAGS@
