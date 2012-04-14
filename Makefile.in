@@ -11,7 +11,7 @@ prefix = @prefix@
 exec_prefix = @exec_prefix@
 infodir = $(prefix)/info
 libdir = $(prefix)/lib
-mandir = $(prefix)/man/man3
+mandir = $(prefix)/share/man/man3
 headerdir = $(prefix)/include/kompex
 
 CC = @CC@
@@ -30,6 +30,7 @@ all: static shared
 clean:
 	$(RM) -r ${builddir}
 	$(RM) -r ${prelibdir}
+	$(RM) man/*.{[1-9], gz}
 	$(RM) config.{h,log,status}
 	$(RM) Makefile
 
@@ -39,9 +40,14 @@ static:
 shared:
 	$(MAKE) -f Makefile-shared.mk CONF=shared .build-conf
 
-install:
+install: doc
 	$(MKDIR) -p $(libdir)
 	$(MKDIR) -p $(headerdir)
 	cp $(prelibdir)/* $(libdir)
 	cp $(includedir)/* $(headerdir)
+	cp man/kompex.3.gz $(mandir)
+
+doc:
+	sed -e "s#{libdir}#${libdir}#g" -e "s#{PRODUCT_NAME}#${PRODUCT_NAME}#g" -e "s#{headerdir}#${headerdir}#g" man/kompex.roff > man/kompex.3
+	gzip -f man/kompex.3
 
