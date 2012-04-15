@@ -22,7 +22,7 @@ md5sums=()
 build() {
   # Although the sources are taken from git, it's not the original repository
   # so I don't use _gitroot and _gitname to prevent pkgver from changin
-  giturl='git@localhost:personals/Geoffroy/kompex-sqlite-wrapper'
+  giturl='git://github.com/Aethelflaed/kompex-sqlite-wrapper.git'
 
   cd "$srcdir"
   msg "Connecting to GIT server...."
