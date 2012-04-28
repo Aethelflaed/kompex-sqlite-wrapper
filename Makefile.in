@@ -2,6 +2,9 @@ SHELL = /bin/sh
 VPATH = @srcdir@
 
 prefix_ = @prefix@
+real_include := $(prefix_)/include
+real_lib := $(prefix_)/lib
+
 ifneq ($(DESTDIR),)
 	prefix_ = $(DESTDIR)@prefix@
 endif
@@ -54,6 +57,6 @@ install: doc
 	cp man/kompex.3.gz $(mandir)
 
 doc:
-	sed -e "s#{libdir}#${libdir}#g" -e "s#{PRODUCT_NAME}#${PRODUCT_NAME}#g" -e "s#{headerdir}#${headerdir}#g" man/kompex.roff > man/kompex.3
+	sed -e "s#{libdir}#${real_lib}#g" -e "s#{PRODUCT_NAME}#${PRODUCT_NAME}#g" -e "s#{headerdir}#${real_include}#g" man/kompex.roff > man/kompex.3
 	gzip -f man/kompex.3
 
