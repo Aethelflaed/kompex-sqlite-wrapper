@@ -14,7 +14,7 @@
 							 \___x___/ (_)   \__,_)| ,__/ | ,__/  \____)(_)          
 							                       | |    | |                           
                    							       (_)    (_)               
-											       (c) 2008-2012 Sven Broeske
+											       (c) 2008-2013 Sven Broeske
 											      [e-mail: mail@svenbroeske.de]
 
  CHANGELOG
@@ -127,4 +127,13 @@
  - fixed bug in SQLiteStatement::GetColumnString() - return of a NULL value caused an access violation
  - improved documentation
  - updated sqlite to version 3.7.11
+
+
+ version 1.9.11 (23.02.2013)
+ - added SQLiteDatabase::CreateModule()
+ - MoveDatabaseToMemory() can move UTF-16 named databases now
+ - MoveDatabaseToMemory() can move data with UTF-8 or UTF-16 encoding now (default usage is UTF-8)
+ - SaveDatabaseFromMemoryToFile() can save the database into a UTF-16 named database now
+ - upgraded and updated NetBeans IDE 6 project files to NetBeans IDE 7
+ - updated sqlite to version 3.7.15.2
 

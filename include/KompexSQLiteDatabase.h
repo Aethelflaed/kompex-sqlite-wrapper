@@ -1,6 +1,6 @@
 /*
     This file is part of Kompex SQLite Wrapper.
-	Copyright (c) 2008-2012 Sven Broeske
+	Copyright (c) 2008-2013 Sven Broeske
 
     Kompex SQLite Wrapper is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -170,9 +170,9 @@ namespace Kompex
 
 		//! The SetSoftHeapLimit() interface places a "soft" limit on the amount of heap memory that may be allocated by SQLite.\n
 		//! If an internal allocation is requested that would exceed the soft heap limit, sqlite3_release_memory()\n
-		//! is invoked one or more times to free up some space before the allocation is performed.
-		//! The limit is called "soft", because if sqlite3_release_memory() cannot free sufficient memory to prevent the limit from being exceeded,\n
-		//! the memory is allocated anyway and the current operation proceeds.
+		//! is invoked one or more times to free up some space before the allocation is performed.\n
+		//! The limit is called "soft", because if sqlite3_release_memory() cannot free sufficient memory to\n
+		//! prevent the limit from being exceeded, the memory is allocated anyway and the current operation proceeds.\n
 		//! A negative or zero value for heapLimit means that there is no soft heap limit and sqlite3_release_memory()\n
 		//! will only be called when memory is exhausted. The default value for the soft heap limit is zero.
 		//! @param heapLimit		Heap limit in bytes.
@@ -189,19 +189,27 @@ namespace Kompex
 		long long GetMemoryUsage() const {return sqlite3_memory_used();}
 
 		//! GetMemoryHighwaterMark() returns the maximum value of used bytes since the high-water mark was last reset.
-		//! @param resetFlag		The memory high-water mark is reset to the current value of GetMemoryUsage() if resetFlag is true.\nThe value returned by GetMemoryHighwaterMark(true) is the high-water mark prior to the reset. 
+		//! @param resetFlag		The memory high-water mark is reset to the current value of GetMemoryUsage() if resetFlag is true.\n
+		//!							The value returned by GetMemoryHighwaterMark(true) is the high-water mark prior to the reset. 
 		long long GetMemoryHighwaterMark(bool resetFlag = false) const {return sqlite3_memory_highwater(resetFlag);}
+
+		//! Provided encodings for MoveDatabaseToMemory().
+		enum UtfEncoding {UTF8, UTF16};
 
 		//! Move the whole database into memory.\n
 		//! Please pay attention, that after a call of MoveDatabaseToMemory() all sql statements are executed into memory.\n
 		//! i.e. that all changes will be lost after closing the database!
 		//! Hint: this method can only be used for databases which were openend with a UTF8 filename
-		void MoveDatabaseToMemory();
+		//! @param encoding		Encoding which will be used for moving the data.
+		void MoveDatabaseToMemory(UtfEncoding encoding = UTF8);
 
 		//! Takes a snapshot of a database which is located in memory and saves it to a database file.
 		//! @param filename		Filename for the new database file to which the snapshot will be saved.\n
 		//!						When you leave the filename blank, you will overwrite your origin file database.
 		void SaveDatabaseFromMemoryToFile(const std::string &filename = "");
+		//! Takes a snapshot of a database which is located in memory and saves it to a database file.
+		//! @param filename		Filename for the new database file to which the snapshot will be saved.
+		void SaveDatabaseFromMemoryToFile(const wchar_t *filename);
 
 		//! This function returns the rowid of the most recent successful INSERT into the database.\n
 		//! If no successful INSERTs have ever occurred on that database connection, zero is returned.\n\n
@@ -219,6 +227,22 @@ namespace Kompex
 		//! This function attempts to free as much heap memory as possible from the database connection.
 		inline void ReleaseMemory() {sqlite3_db_release_memory(mDatabaseHandle);}
 
+		/**
+		This method can be used to register a new virtual table module name. Module names must be\n
+		registered before creating a new virtual table using the module and before using a preexisting\n
+		virtual table for the module. The module name will be registered with this database handle.
+
+		@param moduleName		Name of the module.
+		@param module			Pointer to the implementation of the virtual table module.
+		@param clientData		Arbitrary client data pointer that is passed through into the xCreate\n
+								and xConnect methods of the virtual table module when a new virtual\n
+								table is be being created or reinitialized.
+		@param xDestroy			Pointer to a destructor for the clientData. SQLite will invoke the destructor\n
+								function (if it is not NULL) when SQLite no longer needs the clientData pointer.\n
+								The destructor will also be invoked if the call to CreateModule() fails.
+		*/
+		void CreateModule(const std::string &moduleName, const sqlite3_module *module, void *clientData, void(*xDestroy)(void*));
+
 	protected:
 		//! Callback function for ActivateTracing() [sqlite3_trace]
 		static void TraceOutput(void *ptr, const char *sql);
@@ -228,14 +252,22 @@ namespace Kompex
 		static int ProcessDDLRow(void *db, int nColumns, char **values, char **columns);
 		//! Insert all data from the origin database into the memory database.
 		static int ProcessDMLRow(void *db, int nColumns, char **values, char **columns);
+		//! Takes and saves a snapshot of the memory database in a file.
+		void TakeSnapshot(sqlite3 *destinationDatabase);
 
 	private:
 		//! SQLite db handle
 		struct sqlite3 *mDatabaseHandle;
-		//! Database filename
-		std::string mDatabaseFilename;
+		//! Database filename UTF-8
+		std::string mDatabaseFilenameUtf8;
+		//! Database filename UTF-16
+		std::wstring mDatabaseFilenameUtf16;
 		//! Is the database currently stored in memory?
 		bool mIsMemoryDatabaseActive;
+
+		//! Clean up routine if something failed in MoveDatabaseToMemory() 
+		void CleanUpFailedMemoryDatabase(sqlite3 *memoryDatabase, sqlite3 *rollbackDatabase, bool isDetachNecessary, bool isRollbackNecessary, sqlite3_stmt *stmt, const std::string &errMsg);
+
 	};
 
 };
