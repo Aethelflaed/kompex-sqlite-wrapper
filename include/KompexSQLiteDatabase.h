@@ -1,6 +1,6 @@
 /*
     This file is part of Kompex SQLite Wrapper.
-	Copyright (c) 2008-2013 Sven Broeske
+	Copyright (c) 2008-2014 Sven Broeske
 
     Kompex SQLite Wrapper is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -137,9 +137,9 @@ namespace Kompex
 
 		//! Returns the SQLite db handle.
 		sqlite3 *GetDatabaseHandle() const {return mDatabaseHandle;}
-		//! Returns the versionnumber of sqlite.
+		//! Returns the version number of sqlite.
 		inline int GetLibVersionNumber() const {return sqlite3_libversion_number();}
-		//! Returns the number of database rows that were changed or inserted or deleted\n
+		//! Returns the number of database rows that were changed, inserted or deleted\n
 		//! by the most recently completed SQL statement.
 		int GetDatabaseChanges() const {return sqlite3_changes(mDatabaseHandle);}
 		//! Returns the total number of row changes caused by INSERT, UPDATE or DELETE statements\n
@@ -243,6 +243,47 @@ namespace Kompex
 		*/
 		void CreateModule(const std::string &moduleName, const sqlite3_module *module, void *clientData, void(*xDestroy)(void*));
 
+		//! Returns the number of lookaside memory slots currently checked out.
+		int GetNumberOfCheckedOutLookasideMemorySlots() const;
+		//! Returns the approximate number of bytes of heap memory used by all pager caches.
+		int GetHeapMemoryUsedByPagerCaches() const;
+		//! Returns the approximate number of bytes of heap memory used to store the schema for\n
+		//! all databases associated with the connection - main, temp, and any ATTACH-ed databases.\n
+		//! The full amount of memory used by the schemas is reported, even if the schema memory is\n
+		//! shared with other database connections due to shared cache mode being enabled. 
+		int GetHeapMemoryUsedToStoreSchemas() const;
+		//! Returns the approximate number of bytes of heap and lookaside memory used by all\n
+		//! prepared statements associated with the database connection.
+		int GetHeapAndLookasideMemoryUsedByPreparedStatements() const;
+		//! Returns the number of pager cache hits that have occurred.
+		int GetPagerCacheHitCount() const;
+		//! Returns the number of pager cache misses that have occurred.
+		int GetPagerCacheMissCount() const;
+		//! Returns the number of dirty cache entries that have been written to disk. Specifically,\n
+		//! the number of pages written to the wal file in wal mode databases, or the number of pages\n
+		//! written to the database file in rollback mode databases. Any pages written as part of\n
+		//! transaction rollback or database recovery operations are not included. If an IO or other\n
+		//! error occurs while writing a page to disk, the effect on subsequent SQLITE_DBSTATUS_CACHE_WRITE\n
+		//! requests is undefined.
+		int GetNumberOfDirtyCacheEntries() const;
+		//! Returns zero if all foreign key constraints (deferred or immediate) have been resolved.
+		int GetNumberOfUnresolvedForeignKeys() const;
+						
+		//! Returns the highest number of lookaside memory slots that has been checked out.
+		//! @param resetValue	Allows to reset the highest value.
+		int GetHighestNumberOfCheckedOutLookasideMemorySlots(bool resetValue = false);
+		//! Returns the number malloc attempts that were satisfied using lookaside memory.
+		//! @param resetValue	Allows to reset the highest value.
+		int GetLookasideMemoryHitCount(bool resetValue = false);
+		//! Returns the number malloc attempts that might have been satisfied using lookaside memory\n
+		//! but failed due to the amount of memory requested being larger than the lookaside slot size.
+		//! @param resetValue	Allows to reset the highest value.
+		int GetLookasideMemoryMissCountDueToSmallSlotSize(bool resetValue = false);
+		//! Returns the number malloc attempts that might have been satisfied using lookaside memory\n
+		//! but failed due to all lookaside memory already being in use.
+		//! @param resetValue	Allows to reset the highest value.
+		int GetLookasideMemoryMissCountDueToFullMemory(bool resetValue = false);
+
 	protected:
 		//! Callback function for ActivateTracing() [sqlite3_trace]
 		static void TraceOutput(void *ptr, const char *sql);
@@ -254,6 +295,8 @@ namespace Kompex
 		static int ProcessDMLRow(void *db, int nColumns, char **values, char **columns);
 		//! Takes and saves a snapshot of the memory database in a file.
 		void TakeSnapshot(sqlite3 *destinationDatabase);
+		//! Returns internal runtime status information associated with the current database connection.
+		int GetRuntimeStatusInformation(int operation, bool highwaterValue = false, bool resetFlag = false) const;
 
 	private:
 		//! SQLite db handle
@@ -266,7 +309,7 @@ namespace Kompex
 		bool mIsMemoryDatabaseActive;
 
 		//! Clean up routine if something failed in MoveDatabaseToMemory() 
-		void CleanUpFailedMemoryDatabase(sqlite3 *memoryDatabase, sqlite3 *rollbackDatabase, bool isDetachNecessary, bool isRollbackNecessary, sqlite3_stmt *stmt, const std::string &errMsg);
+		void CleanUpFailedMemoryDatabase(sqlite3 *memoryDatabase, sqlite3 *rollbackDatabase, bool isDetachNecessary, bool isRollbackNecessary, sqlite3_stmt *stmt, const std::string &errMsg, int internalSqliteErrCode);
 
 	};
 

@@ -1,6 +1,6 @@
 /*
     This file is part of Kompex SQLite Wrapper.
-	Copyright (c) 2008-2013 Sven Broeske
+	Copyright (c) 2008-2014 Sven Broeske
 
     Kompex SQLite Wrapper is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -106,20 +106,20 @@ namespace Kompex
 
 		//! Returns the name (UTF-8) assigned to a particular column in the result set of a SELECT statement.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the column name.
+		//! @param column		Number of the column from which we want to read the column name.
 		const char *GetColumnName(int column) const;
 		//! Returns the name (UTF-8) assigned to a particular column in the result set of a SELECT statement.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the column name.
+		//! @param column		Name of the column from which we want to read the column name.
 		const char *GetColumnName(const std::string &column) const;
 
 		//! Returns the name (UTF-16) assigned to a particular column in the result set of a SELECT statement.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the column name.
+		//! @param column		Number of the column from which we want to read the column name.
 		wchar_t *GetColumnName16(int column) const;
 		//! Returns the name (UTF-16) assigned to a particular column in the result set of a SELECT statement.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the column name.
+		//! @param column		Name of the column from which we want to read the column name.
 		wchar_t *GetColumnName16(const std::string &column) const;
 
 		//! Returns the datatype code for the initial data type of the result column.\n
@@ -130,7 +130,7 @@ namespace Kompex
 		//! SQLITE_BLOB			4\n
 		//! SQLITE_NULL			5\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the column type.
+		//! @param column		Number of the column from which we want to read the column type.
 		int GetColumnType(int column) const;
 		//! Returns the datatype code for the initial data type of the result column.\n
 		//! SQLITE_INTEGER		1\n
@@ -140,58 +140,58 @@ namespace Kompex
 		//! SQLITE_BLOB			4\n
 		//! SQLITE_NULL			5\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the column type.
+		//! @param column		Name of the column from which we want to read the column type.
 		int GetColumnType(const std::string &column) const;
 
 		//! Returns a character-string from a single column of the current result row of a query.\n
 		//! NULL values will be returned as null pointer.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		const unsigned char *GetColumnCString(int column) const;
 		//! Returns a character-string from a single column of the current result row of a query.\n
 		//! NULL values will be returned as null pointer.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		const unsigned char *GetColumnCString(const std::string &column) const;
 
 		//! Returns a std::string from a single column of the current result row of a query.\n
 		//! NULL values will be represented as an empty string [std::string("")].\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		std::string GetColumnString(int column) const;
 		//! Returns a std::string from a single column of the current result row of a query.\n
 		//! NULL values will be represented as an empty string [std::string("")].\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		std::string GetColumnString(const std::string &column) const;
 
 		//! Returns a UTF-16 string from a single column of the current result row of a query.\n
 		//! NULL values will be returned as null pointer.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		wchar_t *GetColumnString16(int column) const;
 		//! Returns a UTF-16 string from a single column of the current result row of a query.\n
 		//! NULL values will be returned as null pointer.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		wchar_t *GetColumnString16(const std::string &column) const;
 
 		//! Returns a double from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		double GetColumnDouble(int column) const;
 		//! Returns a double from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		double GetColumnDouble(const std::string &column) const;
 
 		//! Returns a int from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		int GetColumnInt(int column) const;
 		//! Returns a int from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		int GetColumnInt(const std::string &column) const;
 
 		//! Returns a bool from a single column of the current result row of a query.\n
@@ -199,117 +199,117 @@ namespace Kompex
 		//! Please note that GetColumnBool() will also return "false" if you use\n
 		//! SqlStatement() with 'true' or 'false' as value for a bool column. Please use 1 (true)\n
 		//! or 0 (false) as bool value because sqlite doesn't know the key words 'true' and 'false'.
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		bool GetColumnBool(int column) const;
 		//! Returns a bool from a single column of the current result row of a query.\n
 		//! You must first call Sql()!\n
 		//! Please note that GetColumnBool() will also return "false" if you use\n
 		//! SqlStatement() with 'true' or 'false' as value for a bool column. Please use 1 (true)\n
 		//! or 0 (false) as bool value because sqlite doesn't know the key words 'true' and 'false'.
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		bool GetColumnBool(const std::string &column) const;
 
 		//! Returns a int64 from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		int64 GetColumnInt64(int column) const;
 		//! Returns a int64 from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		int64 GetColumnInt64(const std::string &column) const;
 
 		//! Returns a void* from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the data.
+		//! @param column		Number of the column from which we want to read the data.
 		const void *GetColumnBlob(int column) const;
 		//! Returns a void* from a single column of the current result row of a query.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the data.
+		//! @param column		Name of the column from which we want to read the data.
 		const void *GetColumnBlob(const std::string &column) const;		
 		
 		//! Returns the number of bytes in a column that has type BLOB or the number of bytes in a TEXT string with UTF-8 encoding.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the bytes.
+		//! @param column		Number of the column from which we want to read the bytes.
 		int GetColumnBytes(int column) const;
 		//! Returns the same value for BLOBs but for TEXT strings returns the number of bytes in a UTF-16 encoding.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the bytes.
+		//! @param column		Name of the column from which we want to read the bytes.
 		int GetColumnBytes(const std::string &column) const;		
 		//! Returns the same value for BLOBs but for TEXT strings returns the number of bytes in a UTF-16 encoding.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the bytes.
+		//! @param column		Number of the column from which we want to read the bytes.
 		int GetColumnBytes16(int column) const;
 		//! Returns the same value for BLOBs but for TEXT strings returns the number of bytes in a UTF-16 encoding.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the bytes.
+		//! @param column		Name of the column from which we want to read the bytes.
 		int GetColumnBytes16(const std::string &column) const;		
 		
 		//! Returns a UTF-8 zero-terminated name of the database.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the database name.
+		//! @param column		Number of the column from which we want to read the database name.
 		const char *GetColumnDatabaseName(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the database.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the database name.
+		//! @param column		Name of the column from which we want to read the database name.
 		const char *GetColumnDatabaseName(const std::string &column) const;
 		//! Returns a UTF-16 zero-terminated name of the database.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the database name.
+		//! @param column		Number of the column from which we want to read the database name.
 		wchar_t *GetColumnDatabaseName16(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the database.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the database name.
+		//! @param column		Name of the column from which we want to read the database name.
 		wchar_t *GetColumnDatabaseName16(const std::string &column) const;
 
 		//! Returns a UTF-8 zero-terminated name of the table.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the table name.
+		//! @param column		Number of the column from which we want to read the table name.
 		const char *GetColumnTableName(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the table.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the table name.
+		//! @param column		Name of the column from which we want to read the table name.
 		const char *GetColumnTableName(const std::string &column) const;
 		//! Returns a UTF-16 zero-terminated name of the table.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the table name.
+		//! @param column		Number of the column from which we want to read the table name.
 		wchar_t *GetColumnTableName16(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the table.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the table name.
+		//! @param column		Name of the column from which we want to read the table name.
 		wchar_t *GetColumnTableName16(const std::string &column) const;
 
 		//! Returns a UTF-8 zero-terminated name of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the table column name.
+		//! @param column		Number of the column from which we want to read the table column name.
 		const char *GetColumnOriginName(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the table column name.
+		//! @param column		Name of the column from which we want to read the table column name.
 		const char *GetColumnOriginName(const std::string &column) const;
 		//! Returns a UTF-16 zero-terminated name of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the table column name.
+		//! @param column		Number of the column from which we want to read the table column name.
 		wchar_t *GetColumnOriginName16(int column) const;
 		//! Returns a UTF-8 zero-terminated name of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the table column name.
+		//! @param column		Name of the column from which we want to read the table column name.
 		wchar_t *GetColumnOriginName16(const std::string &column) const;
 
 		//! Returns a zero-terminated UTF-8 string containing the declared datatype of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the declared datatype of the table column.
+		//! @param column		Number of the column from which we want to read the declared datatype of the table column.
 		const char *GetColumnDeclaredDatatype(int column) const;
 		//! Returns a zero-terminated UTF-8 string containing the declared datatype of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the declared datatype of the table column.
+		//! @param column		Name of the column from which we want to read the declared datatype of the table column.
 		const char *GetColumnDeclaredDatatype(const std::string &column) const;
 		//! Returns a zero-terminated UTF-16 string containing the declared datatype of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Number of the column from which we want read the declared datatype of the table column.
+		//! @param column		Number of the column from which we want to read the declared datatype of the table column.
 		wchar_t *GetColumnDeclaredDatatype16(int column) const;
 		//! Returns a zero-terminated UTF-8 string containing the declared datatype of the table column.\n
 		//! You must first call Sql()!
-		//! @param column		Name of the column from which we want read the declared datatype of the table column.
+		//! @param column		Name of the column from which we want to read the declared datatype of the table column.
 		wchar_t *GetColumnDeclaredDatatype16(const std::string &column) const;
 
 		//! Return the number of columns in the result set.\n
@@ -322,32 +322,32 @@ namespace Kompex
 		//! Overrides prior binding on the same parameter with an int value.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param value		int value which should inserted in the indicated column
+		//! @param value		int value which should be inserted in the indicated column
 		void BindInt(int column, int value) const;
 		//! Overrides prior binding on the same parameter with an bool value.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param value		bool which should inserted in the indicated column
+		//! @param value		bool which should be inserted in the indicated column
 		void BindBool(int column, bool value) const;
 		//! Overrides prior binding on the same parameter with an UTF-8 string.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param string		UTF-8 string which should inserted in the indicated column
+		//! @param string		UTF-8 string which should be inserted in the indicated column
 		void BindString(int column, const std::string &string) const;
 		//! Overrides prior binding on the same parameter with an UTF-16 string.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param string		UTF-16 string which should inserted in the indicated column
+		//! @param string		UTF-16 string which should be inserted in the indicated column
 		void BindString16(int column, const wchar_t *string) const;
 		//! Overrides prior binding on the same parameter with a double value.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param value		double value which should inserted in the indicated column
+		//! @param value		double value which should be inserted in the indicated column
 		void BindDouble(int column, double value) const;
 		//! Overrides prior binding on the same parameter with an int64 value.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
 		//! @param column		Column, in which the data should be inserted
-		//! @param value		int64 value which should inserted in the indicated column
+		//! @param value		int64 value which should be inserted in the indicated column
 		void BindInt64(int column, int64 value) const;
 		//! Overrides prior binding on the same parameter with NULL.\n
 		//! You must call Sql() one time, before you can use Bind..() methods!
@@ -415,21 +415,21 @@ namespace Kompex
 		}
 
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.
+		//! Can be used for transactions, if you want to use the default error handling.
 		//! Please note that there is only used a reference of your sql statement.\n
 		//! If your sql statement variable is invalid before you called CommitTransaction()
 		//! you need to use SecureTransaction(), which creates a internal copy of your sql statement.
 		//! @param sql		SQL statement
 		inline void Transaction(const char *sql) {mTransactionSQL[mTransactionID++] = std::make_pair(sql, false);}
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.
+		//! Can be used for transactions, if you want to use the default error handling.
 		//! Please note that there is only used a reference of your sql statement.\n
 		//! If your sql statement variable is invalid before you called CommitTransaction()
 		//! you need to use SecureTransaction(), which creates a internal copy of your sql statement.
 		//! @param sql		SQL statement
 		inline void Transaction(const std::string &sql)	{mTransactionSQL[mTransactionID++] = std::make_pair(sql.c_str(), false);}
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.
+		//! Can be used for transactions, if you want to use the default error handling.
 		//! Please note that there is only used a reference of your sql statement.\n
 		//! If your sql statement variable is invalid before you called CommitTransaction()
 		//! you need to use SecureTransaction(), which creates a internal copy of your sql statement.
@@ -437,19 +437,19 @@ namespace Kompex
 		inline void Transaction(const wchar_t *sql) {mTransactionSQL16[mTransactionID++] = std::make_pair(sql, false);}
 
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.\n
+		//! Can be used for transactions, if you want to use the default error handling.\n
 		//! The SecureTransaction() method creates a internal copy of the given sql statement string,\n
 		//! so that you do not run into danger if the string will be invalid due to deletion or local scope.
 		//! @param sql		SQL statement
 		void SecureTransaction(const char *sql);
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.\n
+		//! Can be used for transactions, if you want to use the default error handling.\n
 		//! The SecureTransaction() method creates a internal copy of the given sql statement string,\n
 		//! so that you do not run into danger if the string will be invalid due to deletion or local scope.
 		//! @param sql		SQL statement
 		void SecureTransaction(const std::string sql);
 		//! Can be used only for transaction SQL statements.\n
-		//! Can be used for transactions, if you want use the default error handling.\n
+		//! Can be used for transactions, if you want to use the default error handling.\n
 		//! The SecureTransaction() method creates a internal copy of the given sql statement string,\n
 		//! so that you do not run into danger if the string will be invalid due to deletion or local scope.
 		//! @param sql		SQL statement

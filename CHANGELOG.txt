@@ -14,7 +14,7 @@
 							 \___x___/ (_)   \__,_)| ,__/ | ,__/  \____)(_)          
 							                       | |    | |                           
                    							       (_)    (_)               
-											       (c) 2008-2013 Sven Broeske
+											       (c) 2008-2014 Sven Broeske
 											      [e-mail: mail@svenbroeske.de]
 
  CHANGELOG
@@ -136,4 +136,25 @@
  - SaveDatabaseFromMemoryToFile() can save the database into a UTF-16 named database now
  - upgraded and updated NetBeans IDE 6 project files to NetBeans IDE 7
  - updated sqlite to version 3.7.15.2
+
+
+ version 1.10.12 (20.04.2014)
+ - enabled "Extended Result Codes"
+ - added int SQLiteException::GetSqliteResultCode()
+ - added std::string SQLiteException::GetErrorDescription()
+ - added std::string SQLiteException::GetFilename()
+ - added unsigned int SQLiteException::GetLineNumber()
+ - added int SQLiteDatabase::GetNumberOfCheckedOutLookasideMemorySlots()
+ - added int SQLiteDatabase::GetHeapMemoryUsedByPagerCaches()
+ - added int SQLiteDatabase::GetHeapMemoryUsedToStoreSchemas()
+ - added int SQLiteDatabase::GetHeapAndLookasideMemoryUsedByPreparedStatements()
+ - added int SQLiteDatabase::GetPagerCacheHitCount()
+ - added int SQLiteDatabase::GetPagerCacheMissCount()
+ - added int SQLiteDatabase::GetNumberOfDirtyCacheEntries()
+ - added int SQLiteDatabase::GetNumberOfUnresolvedForeignKeys()
+ - added int SQLiteDatabase::GetHighestNumberOfCheckedOutLookasideMemorySlots(bool resetValue)
+ - added int SQLiteDatabase::GetLookasideMemoryHitCount(bool resetValue)
+ - added int SQLiteDatabase::GetLookasideMemoryMissCountDueToSmallSlotSize(bool resetValue)
+ - added int SQLiteDatabase::GetLookasideMemoryMissCountDueToFullMemory(bool resetValue)
+ - updated sqlite to version 3.8.4.3
 
