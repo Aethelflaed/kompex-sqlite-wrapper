@@ -23,6 +23,7 @@ mandir = $(prefix)/share/man/man3
 headerdir = $(prefix)/include/kompex
 
 CC = @CC@
+CXX = @CXX@
 CFLAGS = @CFLAGS@
 CPPFLAGS = $(CFLAGS) @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
