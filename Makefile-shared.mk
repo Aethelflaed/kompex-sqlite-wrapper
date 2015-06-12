@@ -12,10 +12,10 @@ OBJS= \
 	${objsdir}/sqlite3.o
 
 # C Compiler Flags
-CFLAGS= -fPIC -MMD -MP
+CFLAGS+= -fPIC -MMD -MP
 
 # CC Compiler Flags
-CPPFLAGS= -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -fPIC -MMD -MP -I${includedir}
+CPPFLAGS+= -DKOMPEX_SQLITEWRAPPER_EXPORT -DKOMPEX_SQLITEWRAPPER_DYN -fPIC -MMD -MP -I${includedir}
 
 # Link Libraries and Options
 LDLIBSOPTIONS= -shared -fPIC

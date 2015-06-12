@@ -12,10 +12,10 @@ OBJS= \
 	${objsdir}/sqlite3.o
 
 # C Compiler Flags
-CFLAGS= -MMD -MP
+CFLAGS+= -MMD -MP
 
 # CC Compiler Flags
-CPPFLAGS= -I${includedir} -MMD -MP
+CPPFLAGS+= -I${includedir} -MMD -MP
 
 # Link Libraries and Options
 LDLIBSOPTIONS=
